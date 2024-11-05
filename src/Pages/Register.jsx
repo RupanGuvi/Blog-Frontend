@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import api from "../Services/api";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -13,13 +15,13 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await api.post("/auth/register", { name, email, password });
-      toast.success(res.data.message);
+     const response =  await api.post("/auth/register", { name, email, password });
+      toast.success(response.data.message);
       setError(null);
-      window.location.href = "/login";
+      navigate("/login");
     } catch (error) {
       setError(error.response.data.message);
-      toast.error(error.response.data.message);
+    toast.error(error.response.data.message);
     }
     setEmail("");
     setPassword("");
@@ -94,6 +96,7 @@ const Register = () => {
         >
           Register
         </button>
+        <div className="bg-red-100 p-2 mb-4 text-red-600  font-serif rounded mt-4">Already have an account? <a href="/login">Login</a></div>
       </form>
     </div>
   );
