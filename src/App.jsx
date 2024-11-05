@@ -8,10 +8,14 @@ import ForgotPassword from "./Pages/ForgotPassword";
 import ResetPassword from "./Pages/ResetPassword";
 import AdminPanel from "./Pages/AdminPanel";
 import Navbar from "./Components/Navbar";
+import { ToastContainer } from 'react-toastify';
 
 const App = () => {
   return (
     <div>
+       <div>
+      <ToastContainer />
+     </div>
       <BrowserRouter>
         <div>
           <Navbar />
